@@ -1,0 +1,110 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:..\bin\Debug\netcoreapp3.1\Assets
+/intermediateDir:..\obj\Debug\netcoreapp3.1\Assets
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin ../Assets/fonts/comicSans48.fnt
+/importer:
+/processor:
+/build:../Assets/fonts/comicSans48.fnt;fonts/comicSans48.fnt
+
+#begin ../Assets/fonts/comicSans48_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../Assets/fonts/comicSans48_0.png;fonts/comicSans48_0.png
+
+#begin ../Assets/fonts/comicSans72.fnt
+/importer:
+/processor:
+/build:../Assets/fonts/comicSans72.fnt;fonts/comicSans72.fnt
+
+#begin ../Assets/fonts/comicSans72_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../Assets/fonts/comicSans72_0.png;fonts/comicSans72_0.png
+
+#begin ../Assets/images/splash_screen_bg.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../Assets/images/splash_screen_bg.jpg;images/splash_screen_bg.jpg
+
+#begin ../Assets/SplashScreen.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:../Assets/SplashScreen.xml;SplashScreen.xml
+
+#begin ../Assets/stylesheets/default_ui_skin.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:../Assets/stylesheets/default_ui_skin.xml;stylesheets/default_ui_skin.xml
+
+#begin ../Assets/stylesheets/riviere_font.fnt
+/importer:
+/processor:
+/build:../Assets/stylesheets/riviere_font.fnt;stylesheets/riviere_font.fnt
+
+#begin ../Assets/stylesheets/riviere_font_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../Assets/stylesheets/riviere_font_0.png;stylesheets/riviere_font_0.png
+
+#begin ../Assets/stylesheets/riviere_ui_skin.atlas
+/importer:
+/processor:
+/build:../Assets/stylesheets/riviere_ui_skin.atlas;stylesheets/riviere_ui_skin.atlas
+
+#begin ../Assets/stylesheets/riviere_ui_skin.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:../Assets/stylesheets/riviere_ui_skin.xml;stylesheets/riviere_ui_skin.xml
+
+#begin ../Assets/stylesheets/riviere_ui_skin_atlas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../Assets/stylesheets/riviere_ui_skin_atlas.png;stylesheets/riviere_ui_skin_atlas.png
+

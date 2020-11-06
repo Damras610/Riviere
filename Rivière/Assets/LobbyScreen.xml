@@ -1,0 +1,22 @@
+<Project StylesheetPath="stylesheets/riviere_ui_skin.xml">
+  <Project.ExportOptions Namespace="Rivière.Screen.UI" Class="LobbyScreenUI" OutputPath="C:\Users\Jeremy Harrault\source\repos\Rivière\Rivière\Src\Screen\UI" />
+  <Panel>
+    <Image Renderable="images/splash_screen_bg.jpg" />
+    <Label Text="RIVIERE" Font="fonts/comicSans48.fnt" TextAlign="Center" TextColor="#000000FF" Top="30" HorizontalAlignment="Center" />
+    <Label Text="Ajouter un joueur" Font="fonts/comicSans32.fnt" TextColor="#000000FF" Left="30" Top="100" />
+    <TextBox Font="fonts/comicSans32.fnt" Left="30" Top="150" Width="250" Padding="3" Id="playername_textbox" />
+    <TextButton Text="OK" Font="fonts/comicSans32.fnt" Enabled="False" Left="280" Top="150" Padding="3" Id="add_player_button" />
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Left="30" Top="200" Id="playerslist_grid" >
+      <Grid.ColumnsProportions>
+        <Proportion Type="Auto" />
+        <Proportion Type="Auto" />
+      </Grid.ColumnsProportions>
+      <Grid.RowsProportions>
+        <Proportion Type="Auto" />
+      </Grid.RowsProportions>
+      <ImageButton Image="images/remove-icon.png" OverImage="images/remove-icon-dark.png" StyleName="transparent-bg" VerticalAlignment="Center" GridColumn="1" GridRow="1" />
+      <Label Text="Georges" Font="fonts/comicSans32.fnt" TextAlign="Center" TextColor="#000000FF" Padding="3" VerticalAlignment="Center" GridColumn="2" GridRow="1" />
+    </Grid>
+    <TextButton Text="Start the game" TextColor="#000000FF" Font="fonts/comicSans48.fnt" StyleName="transparent-bg" Left="100" HorizontalAlignment="Center" VerticalAlignment="Center" />
+  </Panel>
+</Project>
