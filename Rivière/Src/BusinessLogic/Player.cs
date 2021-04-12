@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
+using Rivière.Utils;
+using System.Collections.ObjectModel;
 
 namespace Rivière.BusinessLogic
 {
@@ -18,45 +21,38 @@ namespace Rivière.BusinessLogic
 
     public class Player
     {
-        public string Name { get; private set; }
+        public string Name { get; internal set; }
 
-        public Card[] Cards
-        { 
-            get
-            {
-                return (Card[])cards.Clone();
-            }
-        }
+        public CardColor? ChosenCardColor { get; internal set; }
+        public LessEqualMore? ChosenLessEqualMore { get; internal set; }
+        public InterEqualExter? ChosenInterEqualExter { get; internal set; }
+        public CardSuit? ChosenCardSuit { get; internal set; }
 
-        public CardColor? ChosenCardColor { get; private set; }
-        public LessEqualMore? ChosenLessEqualMore { get; private set; }
-        public InterEqualExter? ChosenInterEqualExter { get; private set; }
-        public CardSuit? ChosenCardSuit { get; private set; }
+        public ReadOnlyDictionary<Player, int> GivenSips => givenSips.ReadOnly();
+        public ReadOnlyDictionary<Player, int> ReceivedSips => receiveSips.ReadOnly();
+        public int TakenSipsFromDeckCount { get; private set; }
 
-        readonly Card[] cards;
+        public ReadOnlyCollection<Card> Cards => cards.AsReadOnly();
+
+        readonly List<Card> cards = new List<Card>(4);
+
+        readonly Dictionary<Player, int> givenSips = new Dictionary<Player, int>();
+        readonly Dictionary<Player, int> receiveSips = new Dictionary<Player, int>();
 
         public Player(string name)
         {
-            this.Name = name;
+            Name = name;
 
-            cards = new Card[4];
             ChosenCardColor = null;
             ChosenLessEqualMore = null;
             ChosenInterEqualExter = null;
             ChosenCardSuit = null;
+            TakenSipsFromDeckCount = 0;
         }
-
-        public void SetChoiceCardColor(CardColor choiceCardColor) => ChosenCardColor = choiceCardColor;
-
-        public void SetChoiceLessEqualMore(LessEqualMore choiceLessEqualMore) => ChosenLessEqualMore = choiceLessEqualMore;
-
-        public void SetChoiceInterEqualExter(InterEqualExter choiceInterEqualExter) => ChosenInterEqualExter = choiceInterEqualExter;
-
-        public void SetChoiceCardSuit(CardSuit choiceCardSuit) => ChosenCardSuit = choiceCardSuit;
 
         public void DrawCard(Card card, GameState gameState)
         {
-            cards[(int)gameState - 1] = card;
+            cards.Insert((int)gameState - 1, card);
         }
 
         public bool HasChosenGoodColor()
@@ -68,9 +64,9 @@ namespace Rivière.BusinessLogic
         {
             LessEqualMore actualLessMoreEqual;
 
-            if (cards[1].Number < cards[0].Number)
+            if (cards[1].Value < cards[0].Value)
                 actualLessMoreEqual = LessEqualMore.Less;
-            else if (cards[1].Number > cards[0].Number)
+            else if (cards[1].Value > cards[0].Value)
                 actualLessMoreEqual = LessEqualMore.More;
             else
                 actualLessMoreEqual = LessEqualMore.Equal;
@@ -82,12 +78,12 @@ namespace Rivière.BusinessLogic
         {
             InterEqualExter actualInterEqualExter;
 
-            Card smallestCard = (cards[0].Number <= cards[1].Number) ? cards[0] : cards[1];
-            Card biggestCard = (cards[0].Number > cards[1].Number) ? cards[0] : cards[1];
+            Card smallestCard = (cards[0].Value <= cards[1].Value) ? cards[0] : cards[1];
+            Card biggestCard = (cards[0].Value > cards[1].Value) ? cards[0] : cards[1];
 
-            if (smallestCard.Number < cards[2].Number && cards[2].Number < biggestCard.Number)
+            if (smallestCard.Value < cards[2].Value && cards[2].Value < biggestCard.Value)
                 actualInterEqualExter = InterEqualExter.Inter;
-            else if (smallestCard.Number > cards[2].Number || cards[2].Number > biggestCard.Number)
+            else if (smallestCard.Value > cards[2].Value || cards[2].Value > biggestCard.Value)
                 actualInterEqualExter = InterEqualExter.Exter;
             else
                 actualInterEqualExter = InterEqualExter.Equal;
@@ -106,5 +102,43 @@ namespace Rivière.BusinessLogic
             return cards.Where(c => c.Number == card.Number).Count();
         }
 
+        public void TakeSips(int numberOfSips, Player player = null)
+        {
+            // The sips are from the draw
+            if (player == null)
+            {
+                TakenSipsFromDeckCount += numberOfSips;
+            }
+            // The sips are from a player
+            else
+            {
+                // Add the number of sips to the counter of receives sips
+                if (!receiveSips.ContainsKey(player))
+                    receiveSips.Add(player, 0);
+                receiveSips[player] += numberOfSips;
+                // Add the number of given sips of the other player
+                player.GiveSipsTo(numberOfSips, this);
+            }
+        }
+
+        private void GiveSipsTo(int numberOfSips, Player player)
+        {
+            if (!givenSips.ContainsKey(player))
+                givenSips.Add(player, 0);
+            givenSips[player] += numberOfSips;
+        }
+
+        public void Reset()
+        {
+            cards.Clear();
+            ChosenCardColor = null;
+            ChosenLessEqualMore = null;
+            ChosenInterEqualExter = null;
+            ChosenCardSuit = null;
+
+            givenSips.Clear();
+            receiveSips.Clear();
+            TakenSipsFromDeckCount = 0;
+        }
     }
 }

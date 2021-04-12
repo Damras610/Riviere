@@ -6,6 +6,7 @@ using Myra.Graphics2D.UI;
 using Myra.Graphics2D.UI.Styles;
 using Rivière.BusinessLogic;
 using System.IO;
+using Rivière.Translations;
 using XNAssets;
 using XNAssets.Utility;
 
@@ -52,6 +53,7 @@ namespace Rivière
             FileAssetResolver assetResolver = new FileAssetResolver(PathUtils.ExecutingAssemblyDirectory);
             assetManager = new AssetManager(GraphicsDevice, assetResolver);
 
+            ExtensionTranslations.LoadTranslations(new FrTranslations());
             GameSceneNavigation = new GameSceneNavigation();
             GameLogic = new GameLogic();
             base.Initialize();
@@ -70,9 +72,6 @@ namespace Rivière
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
             if (GameSceneNavigation.CurrentScene == null)
                 GameSceneNavigation.ShowSplashScreen();
 

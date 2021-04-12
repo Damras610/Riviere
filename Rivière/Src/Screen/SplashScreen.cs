@@ -13,18 +13,11 @@ namespace Rivière.Screen
         SplashScreenUI ui;
 
         public double splashScreenRemainingTime;
-        public double splashScreenTimeout = 5000;
+        public double splashScreenTimeout = 0000;
 
         public void Setup()
         {
             splashScreenRemainingTime = splashScreenTimeout;
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            splashScreenRemainingTime -= gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (splashScreenRemainingTime < 0)
-                ui.start_button.Visible = true;
         }
 
         public Widget SetupUI()
@@ -37,6 +30,13 @@ namespace Rivière.Screen
             };
 
             return ui;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            splashScreenRemainingTime -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (splashScreenRemainingTime < 0)
+                ui.start_button.Visible = true;
         }
 
         public void Dispose()

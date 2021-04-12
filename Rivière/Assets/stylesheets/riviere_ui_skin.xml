@@ -13,11 +13,11 @@
 		<ScrollViewerStyle HorizontalScrollBackground="scroll-horizontal" HorizontalScrollKnob="scroll-knob-horizontal" VerticalScrollBackground="scroll" VerticalScrollKnob="scroll-knob-vertical" />
 	</ScrollViewerStyles>
 	<ButtonStyles>
-		<ButtonStyle Background="button" OverBackground="button-over" PressedBackground="button-down">
-			<LabelStyle Font="default-font" TextColor="white" DisabledTextColor="gray" PressedTextColor="red" />
+		<ButtonStyle Background="button" OverBackground="button-over" PressedBackground="button-red">
+			<LabelStyle Font="default-font" TextColor="white" DisabledTextColor="gray" />
 		</ButtonStyle>
 		<ButtonStyle Id="transparent-bg">
-			<LabelStyle Font="default-font" TextColor="black" DisabledTextColor="gray" PressedTextColor="red" />
+			<LabelStyle Font="default-font" TextColor="black" DisabledTextColor="gray" OverTextColor="red" />
 		</ButtonStyle>
 	</ButtonStyles>
 	<CheckBoxStyles>

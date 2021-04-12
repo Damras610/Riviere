@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Rivière.BusinessLogic;
+using Microsoft.Xna.Framework;
 
 namespace Rivière.Utils
 {
@@ -19,5 +23,11 @@ namespace Rivière.Utils
                 list[n] = value;
             }
         }
+
+        public static ReadOnlyDictionary<TKey, TValue> ReadOnly<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
+            => new ReadOnlyDictionary<TKey, TValue>(dictionary);
+
+        public static Color ToXNAColor(this CardColor color) 
+            => (color == CardColor.Red) ? Color.Red : Color.Black;
     }
 }

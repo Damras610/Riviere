@@ -1,0 +1,55 @@
+<Project StylesheetPath="stylesheets/riviere_ui_skin.xml">
+  <Project.ExportOptions Namespace="Rivière.Screen.UI" Class="GiveSipsDialog" OutputPath="C:\Users\Jeremy Harrault\source\repos\Rivière\Rivière\Src\Screen\UI" />
+  <Dialog Title="On distribue" >
+    <Grid ShowGridLines="True" GridLinesColor="#000000FF" Id="score_grid">
+      <Grid.ColumnsProportions>
+        <Proportion Type="Auto" />
+        <Proportion Type="Part" />
+        <Proportion Type="Part" />
+        <Proportion Type="Part" />
+      </Grid.ColumnsProportions>
+      <Grid.RowsProportions>
+        <Proportion Type="Auto" />
+        <Proportion Type="Part" />
+        <Proportion Type="Part" />
+        <Proportion Type="Part" />
+        <Proportion Type="Part" />
+        <Proportion Type="Part" />
+        <Proportion Type="Part" />
+      </Grid.RowsProportions>
+      <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" GridColumn="1" Visible="False" Id="gridfirstRow_label" />
+      
+      <HorizontalStackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5, 0" GridColumn="1" GridRow="1" >
+        <ImageButton Image="images/negative.png" PressedImage="images/negative-icon-dark.png" StyleName="transparent-bg" VerticalAlignment="Center" />
+        <Label Text="1" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="10" />
+        <ImageButton Image="images/plus.png" PressedImage="images/plus-icon-dark.png" StyleName="transparent-bg" VerticalAlignment="Center" />
+      </HorizontalStackPanel>
+      <HorizontalStackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5, 0" GridColumn="2" GridRow="1" >
+        <ImageButton Image="images/negative.png" PressedImage="images/negative-icon-dark.png" StyleName="transparent-bg" VerticalAlignment="Center" />
+        <Label Text="1" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="10" />
+        <ImageButton Image="images/plus.png" PressedImage="images/plus-icon-dark.png" StyleName="transparent-bg" VerticalAlignment="Center" />
+      </HorizontalStackPanel>
+      <HorizontalStackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5, 0" GridColumn="3" GridRow="1" >
+        <ImageButton Image="images/negative.png" PressedImage="images/negative-icon-dark.png" StyleName="transparent-bg" VerticalAlignment="Center" />
+        <Label Text="1" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="10" />
+        <ImageButton Image="images/plus.png" PressedImage="images/plus-icon-dark.png" StyleName="transparent-bg" VerticalAlignment="Center" />
+      </HorizontalStackPanel>
+      
+      <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridRow="6" >
+        <ListItem Text="Valentin" />
+        <ListItem Text="Valentin" />
+        <ListItem Text="Valentin" />
+      </ComboBox>
+      
+      <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" GridColumn="1" />
+      <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" GridColumn="2" />
+      <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center" GridColumn="3" />
+
+      <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="5, 0" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="1" />
+      <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="5, 0" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="2" />
+      <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="5, 0" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="3" />
+      <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="5, 0" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="4" />
+      <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" Padding="5, 0" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="5" />
+    </Grid>
+  </Dialog>
+</Project>

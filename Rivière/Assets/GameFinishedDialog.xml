@@ -1,0 +1,6 @@
+<Project StylesheetPath="stylesheets/riviere_ui_skin.xml">
+  <Project.ExportOptions Namespace="Rivière.Screen.UI" Class="GameFinishedDialog" OutputPath="C:\Users\Jeremy Harrault\source\repos\Rivière\Rivière\Src\Screen\UI" />
+  <Dialog Title="Partie terminee" Left="506" Top="240" Padding="10" >
+    <CheckBox Text="Conserver les joueurs" Font="fonts/comicSans24.fnt" ImageTextSpacing="10" Padding="5, 0" Id="keepplayers_checkbox" />
+  </Dialog>
+</Project>

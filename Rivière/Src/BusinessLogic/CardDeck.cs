@@ -9,12 +9,15 @@ namespace Rivière.BusinessLogic
     {
         readonly List<Card> drawPile = new List<Card>();
         readonly List<Card> discardPile = new List<Card>();
+        public int DrawPileCount => drawPile.Count();
+        public int DiscardPileCount => discardPile.Count();
+        public Card LastDraw => discardPile.LastOrDefault();
 
         public CardDeck()
         {
             // Fill the pile with the cards
             foreach (CardSuit cardSuitValue in Enum.GetValues(typeof(CardSuit)))
-                foreach (CardInfo cardNumberValue in Enum.GetValues(typeof(CardInfo)))
+                foreach (CardNumber cardNumberValue in Enum.GetValues(typeof(CardNumber)))
                     drawPile.Add(new Card(cardNumberValue, cardSuitValue));
         }
 
@@ -39,8 +42,5 @@ namespace Rivière.BusinessLogic
                 drawPile.Add(card);
             }
         }
-
-        public int DrawPileCount() => drawPile.Count();
-        public int DiscardPileCount() => discardPile.Count();
     }
 }

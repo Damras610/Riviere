@@ -4,6 +4,6 @@
     <Image Renderable="images/splash_screen_bg.jpg" />
     <Label Text="RIVIERE" Font="fonts/comicSans72.fnt" TextColor="#000000FF" Top="-75" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#00000000" />
     <Label Text="Le jeu" Font="fonts/comicSans48.fnt" TextColor="#000000FF" Top="-10" HorizontalAlignment="Center" VerticalAlignment="Center" />
-    <TextButton Text="Press to start" TextColor="#000000FF" Font="fonts/comicSans48.fnt" Visible="False" StyleName="transparent-bg" Top="130" HorizontalAlignment="Center" VerticalAlignment="Center" Id="start_button" />
+    <TextButton Text="Cliquez pour demarrer" TextColor="#000000FF" Font="fonts/comicSans48.fnt" Visible="False" StyleName="transparent-bg" Top="130" HorizontalAlignment="Center" VerticalAlignment="Center" Id="start_button" />
   </Panel>
 </Project>

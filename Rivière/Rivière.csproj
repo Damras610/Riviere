@@ -9,6 +9,7 @@
   <PropertyGroup>
     <ApplicationIcon></ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />

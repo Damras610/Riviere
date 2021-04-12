@@ -2,9 +2,9 @@
 
 namespace Rivière.BusinessLogic
 {
-    public enum CardInfo
+    public enum CardNumber
     {
-        Ace = 1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King
+        Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace,
     }
 
     public enum CardSuit
@@ -19,7 +19,9 @@ namespace Rivière.BusinessLogic
 
     public class Card : IEquatable<Card>, IComparable<Card>
     {
-        public CardInfo Number { get; private set; }
+        public static bool isAceWorseThanTwo = false;
+
+        public CardNumber Number { get; private set; }
         public CardSuit Suit { get; private set; }
         public CardColor Color
         {
@@ -32,10 +34,22 @@ namespace Rivière.BusinessLogic
             }
         }
 
-        public Card(CardInfo number, CardSuit suit)
+        public int Value
         {
-            this.Number = number;
-            this.Suit = suit;
+            get
+            {
+                // If the card is an Ace and the Ace is worse than two, return 1
+                if (Number == CardNumber.Ace && isAceWorseThanTwo)
+                    return 1;
+                // Otherwise, return the enum value
+                return (int)Number;
+            }
+        }
+
+        public Card(CardNumber number, CardSuit suit)
+        {
+            Number = number;
+            Suit = suit;
         }
 
         public bool Equals(Card other)

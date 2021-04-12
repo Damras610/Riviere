@@ -1,0 +1,90 @@
+<Project StylesheetPath="stylesheets/riviere_ui_skin.xml">
+  <Project.ExportOptions Namespace="Rivière.Screen" Class="ScoreGrid" OutputPath="C:\Users\Jeremy Harrault\source\repos\Rivière\Rivière\Src\Screen\UI" />
+  <Grid ShowGridLines="True" GridLinesColor="#000000FF" Background="#FFFFFFFF" Id="score_grid">
+    <Grid.ColumnsProportions>
+      <Proportion Type="Auto" />
+      <Proportion Type="Auto" />
+      <Proportion Type="Auto" />
+      <Proportion Type="Auto" />
+      <Proportion Type="Auto" />
+      <Proportion Type="Auto" />
+      <Proportion Type="Auto" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+    </Grid.ColumnsProportions>
+    <Grid.RowsProportions>
+      <Proportion Type="Auto" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+      <Proportion Type="Part" />
+    </Grid.RowsProportions>
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visible="False" Id="gridcontent_label" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visible="False" Background="#FFFFFFFF" Id="gridfirstcolumn_label" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Visible="False" Background="#FFFFFFFF" Border="#000000FF" Id="gridfirstrowmovablecolumns_label" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visible="False" Background="#404040FF" Id="graycell_label" />
+    <Label Text="Joueurs" Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Border="#000000FF" />
+    <Label Text="Couleur" Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="1" Border="#000000FF" />
+    <Label Text="↑ ou ↓" Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="2" Border="#000000FF" />
+    <Label Text="↔ ou ↕" Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="3" Border="#000000FF" />
+    <Label Text="Suite" Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="4" Border="#000000FF" />
+    <TextButton Text="◄" Font="fonts/consolas24.fnt" BorderThickness="0, 0, 0, 1" Padding="3, 0" HorizontalAlignment="Stretch" GridColumn="5" Border="#404040FF" Id="movecolumnleft_button" />
+    <TextButton Text="►" Font="fonts/consolas24.fnt" BorderThickness="0, 0, 0, 1" Padding="3, 0" HorizontalAlignment="Stretch" GridColumn="6" Border="#404040FF" Id="movecolumnright_button" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="7" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="8" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="9" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="10" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="11" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="12" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="13" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="14" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="15" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="16" Border="#000000FF" />
+    <Label Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" BorderThickness="0, 0, 0, 1" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" GridColumn="17" Border="#000000FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="1" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="2" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="3" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="4" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="5" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="6" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="7" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="8" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="9" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="5" GridRow="10" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="1" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="2" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="3" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="4" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="5" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="6" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="7" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="8" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="9" Background="#404040FF" />
+    <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridColumn="6" GridRow="10" Background="#404040FF" />
+    <Label Text="Valentin" Font="fonts/consolas24.fnt" TextAlign="Center" TextColor="#000000FF" Padding="5, 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" GridRow="1" Id="gridfirstColumn_label" />
+    <Label Text="Michel" Font="fonts/consolas24.fnt" TextColor="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="2" />
+    <Label Text="Michel" Font="fonts/consolas24.fnt" TextColor="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="3" />
+    <Label Text="Michel" Font="fonts/consolas24.fnt" TextColor="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="4" />
+    <Label Text="Michel" Font="fonts/consolas24.fnt" TextColor="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="5" />
+    <Label Text="Michel" Font="fonts/consolas24.fnt" TextColor="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="6" />
+    <Label Text="Michel" Font="fonts/consolas24.fnt" TextColor="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="7" />
+    <Label Text="Michel" Font="fonts/consolas24.fnt" TextColor="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="8" />
+    <Label Text="Michel" Font="fonts/consolas24.fnt" TextColor="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="9" />
+    <Label Text="Michel" Font="fonts/consolas24.fnt" TextColor="#000000FF" HorizontalAlignment="Center" VerticalAlignment="Center" GridRow="10" />
+  </Grid>
+</Project>

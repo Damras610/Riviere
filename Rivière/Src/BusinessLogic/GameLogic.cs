@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Rivière.Utils;
+
 
 namespace Rivière.BusinessLogic
 {
-    public class GameLogic
+    public partial class GameLogic
     {
         /// <summary>
         /// The current round or step of the game.
@@ -30,41 +32,53 @@ namespace Rivière.BusinessLogic
             }
         }
 
-        // --------------- Callback for UI -------------------
-        // Game
-        /// <summary>
-        /// OnPlayerResult is invoked at each draw.
-        /// </summary>
-        public Action<List<PlayerDrawResult>> OnDrawResults;
-        public Action OnGameFinished;
-        // Errors
-        public Action OnPlayerNameAlreadyTaken;
-        public Action OnTooManyPlayers;
-        public Action OnNotEnoughPlayers;
-
         /// <summary>
         /// The current list of players
         /// </summary>
         public readonly List<Player> players = new List<Player>();
+        
         /// <summary>
         /// The card deck
         /// </summary>
         public readonly CardDeck cardDeck = new CardDeck();
 
         /// <summary>
+        /// The special rules of the game. It is possible to set rules while the gamestate
+        /// is NOT_STARTED or WAITING_FOR_PLAYER or WAITING_FOR_START.
+        /// </summary>
+        public SpecialRules SpecialRules
+        {
+            get => specialRules;
+            set
+            {
+                if (GameState != GameState.NOT_STARTED
+                    && GameState != GameState.WAITING_FOR_PLAYER
+                    && GameState != GameState.WAITING_FOR_START)
+                {
+                    throw new GameStateUnauthorizedAction("Setting game rules", GameState);
+                }
+                specialRules = value;
+            }
+        }
+
+        /// <summary>
         /// The maximum number of players to start a game.
         /// </summary>
-        const int maxPlayers = 10;
+        public const int maxPlayers = 10;
+
         /// <summary>
         /// The minimum number of players to start a game.
         /// </summary>
-        const int minPlayers = 4;
+        public const int minPlayers = 4;
+
         /// <summary>
         /// The number of sips during the death card. It is important because once we reach
         /// the death card, the number of sips during last round goes back to 1, until the 
         /// deck is empty.
         /// </summary>
-        int numberOfSipsDeathCard = 6;
+        public const int numberOfSipsDeathCard = 6;
+
+        private SpecialRules specialRules = new SpecialRules();
 
         /// <summary>
         /// The index of the current player used to get the current player.
@@ -75,10 +89,16 @@ namespace Rivière.BusinessLogic
         /// Used during the last round of the game. Do the players give or take sips?
         /// </summary>
         bool lastRoundIsGiving = true;
+
         /// <summary>
         /// Used during the last round of the game. How many sips for this draw?
         /// </summary>
         int lastRoundNumberOfSips = 1;
+
+        public GameLogic()
+        {
+            GameState = GameState.NOT_STARTED;
+        }
 
         /// <summary>
         /// Start the preparation of the game.
@@ -93,6 +113,7 @@ namespace Rivière.BusinessLogic
             }
 
             GameState = GameState.WAITING_FOR_PLAYER;
+            OnGamePreparation?.Invoke();
         }
 
         /// <summary>
@@ -109,11 +130,12 @@ namespace Rivière.BusinessLogic
 
             if (players.Where(p => p.Name == playerName).Any())
             {
-                OnPlayerNameAlreadyTaken();
+                OnPlayerNameAlreadyTaken(playerName);
                 return;
             }
 
             players.Add(new Player(playerName));
+            OnPlayerAdded?.Invoke(playerName);
         }
 
         /// <summary>
@@ -128,7 +150,12 @@ namespace Rivière.BusinessLogic
                 throw new GameStateUnauthorizedAction("Remove a player", GameState);
             }
 
-            players.RemoveAll(p => p.Name == playerName);
+            Player playerToRemove = players.Where(p => p.Name == playerName).FirstOrDefault();
+            if (playerToRemove != null)
+            {
+                players.Remove(playerToRemove);
+                OnPlayerRemoved?.Invoke(playerName);
+            }
         }
 
         /// <summary>
@@ -143,7 +170,25 @@ namespace Rivière.BusinessLogic
                 throw new GameStateUnauthorizedAction("Prepare the game", GameState);
             }
 
+            if (players.Count() > maxPlayers)
+            {
+                OnTooManyPlayers?.Invoke();
+                OnPlayerValidated?.Invoke(false);
+                return;
+            }
+            else if (players.Count < minPlayers)
+            {
+                OnNotEnoughPlayers?.Invoke();
+                OnPlayerValidated?.Invoke(false);
+                return;
+            }
+
+            // Randomize player order if the rule is set
+            if (SpecialRules.ArePlayersShuffled)
+                players.Shuffle();
+
             GameState = GameState.WAITING_FOR_START;
+            OnPlayerValidated?.Invoke(true);
         }
 
         /// <summary>
@@ -159,33 +204,40 @@ namespace Rivière.BusinessLogic
                 throw new GameStateUnauthorizedAction("Start the game", GameState);
             }
 
-            if (players.Count() > maxPlayers)
-            {
-                OnTooManyPlayers();
-                return;
-            }
-            else if (players.Count < minPlayers)
-            {
-                OnNotEnoughPlayers();
-                return;
-            }
-
+            // Shuffle card deck
             cardDeck.ShuffleDrawPile();
 
-            currentPlayerIdx = 0;
+            // Set the "ace worse than two" rule
+            Card.isAceWorseThanTwo = SpecialRules.IsAceWorseThanTwo;
+
+            // Misc init
             lastRoundIsGiving = true;
             lastRoundNumberOfSips = 1;
+
+            OnGameStarted?.Invoke();
+
             GameState = GameState.ASKING_FOR_COLOR;
+            currentPlayerIdx = 0;
+            OnPlayerTurn?.Invoke(CurrentPlayer, GameState);
         }
 
         /// <summary>
         /// Reset the game. Can be done at any moment of the game.
         /// Output state: NOT_STARTED
         /// </summary>
-        public void ResetGame()
+        public void ResetGame(bool keepPlayers)
         {
             cardDeck.ResetPiles();
-            players.Clear();
+            if (keepPlayers)
+            {
+                foreach (Player player in players)
+                    player.Reset();
+            }
+            else
+            {
+                players.Clear();
+                specialRules = new SpecialRules();
+            }
             GameState = GameState.NOT_STARTED;
         }
 
@@ -201,7 +253,7 @@ namespace Rivière.BusinessLogic
                 throw new GameStateUnauthorizedAction("Asking for color", GameState);
             }
 
-            CurrentPlayer.SetChoiceCardColor(choiceCardColor);
+            CurrentPlayer.ChosenCardColor = choiceCardColor;
         }
 
         /// <summary>
@@ -216,7 +268,7 @@ namespace Rivière.BusinessLogic
                 throw new GameStateUnauthorizedAction("Asking for less/equal/more", GameState);
             }
 
-            CurrentPlayer.SetChoiceLessEqualMore(choiceLessEqualMore);
+            CurrentPlayer.ChosenLessEqualMore = choiceLessEqualMore;
         }
 
         /// <summary>
@@ -230,7 +282,7 @@ namespace Rivière.BusinessLogic
             {
                 throw new GameStateUnauthorizedAction("Asking for inter/equal/exter", GameState);
             }
-            CurrentPlayer.SetChoiceInterEqualExter(choiceInterEqualExter);
+            CurrentPlayer.ChosenInterEqualExter = choiceInterEqualExter;
         }
 
         /// <summary>
@@ -245,7 +297,19 @@ namespace Rivière.BusinessLogic
                 throw new GameStateUnauthorizedAction("Asking for suit", GameState);
             }
 
-            CurrentPlayer.SetChoiceCardSuit(choiceCardSuit);
+            // Play Guillaume's Heart rule
+            if (SpecialRules.IsGuillaumeHeart)
+            {
+                // If the rule is active and the name of the current player is "Guillaume"
+                // automatically set Heart as the Card suit
+                if (CurrentPlayer.Name == "Guillaume")
+                {
+                    CurrentPlayer.ChosenCardSuit = CardSuit.Heart;
+                    return;
+                }
+            }
+
+            CurrentPlayer.ChosenCardSuit = choiceCardSuit;
         }
 
         /// <summary>
@@ -266,19 +330,12 @@ namespace Rivière.BusinessLogic
                 throw new GameStateUnauthorizedAction("Asking for suit", GameState);
             }
 
-            // If there is no card left in the draw pile, the game is finished.
-            if (cardDeck.DrawPileCount() == 0)
-            {
-                GameState = GameState.FINISHED;
-                OnGameFinished();
-                return;
-            }
-
             // Draw a card
             Card card = cardDeck.DrawCard();
+            OnCardDrawn?.Invoke(card);
 
-
-            // For round 1 to 4
+            // Run the draw
+            // - For round 1 to 4
             if (GameState == GameState.ASKING_FOR_COLOR
                 || GameState == GameState.ASKING_FOR_LESS_EQUAL_MORE
                 || GameState == GameState.ASKING_FOR_INTER_EQUAL_EXTER
@@ -286,12 +343,22 @@ namespace Rivière.BusinessLogic
             {
                 RunNextDrawRound1To4(card);
             }
-
-            // For round 5
+            // - For round 5
             else if (GameState == GameState.GIVING_OR_RECEIVING_DRINKS)
             {
                 RunNextDrawRound5(card);
             }
+
+            // If there is no card left in the draw pile, the game is finished.
+            if (cardDeck.DrawPileCount == 0)
+            {
+                GameState = GameState.FINISHED;
+                OnGameFinished?.Invoke();
+                return;
+            }
+
+            // Prepare next turn
+            OnPlayerTurn(CurrentPlayer, GameState);
         }
 
         /// <summary>
@@ -321,9 +388,9 @@ namespace Rivière.BusinessLogic
 
             // Create the results
             List<PlayerDrawResult> drawResults = new List<PlayerDrawResult>();
-            drawResults.Add(new PlayerDrawResult(CurrentPlayer, giving, numberOfSips));
+            drawResults.Add(new PlayerDrawResult(CurrentPlayer, giving, 0, numberOfSips));
             // Send them
-            OnDrawResults(drawResults);
+            OnDrawResults?.Invoke(drawResults);
 
             // Increment the current player idx for the next draw
             currentPlayerIdx++;
@@ -346,13 +413,14 @@ namespace Rivière.BusinessLogic
 
             foreach (Player player in players)
             {
-                int numberOfSips = player.HowManyOccurencesNumber(card) * lastRoundNumberOfSips;
+                int numberOfOccurences = player.HowManyOccurencesNumber(card);
+                int numberOfSips = numberOfOccurences * lastRoundNumberOfSips;
 
                 if (numberOfSips != 0)
-                    drawResults.Add(new PlayerDrawResult(player, lastRoundIsGiving, numberOfSips));
+                    drawResults.Add(new PlayerDrawResult(player, lastRoundIsGiving, numberOfOccurences, numberOfSips));
             }
 
-            OnDrawResults(drawResults);
+            OnDrawResults?.Invoke(drawResults);
 
             // If the current round was "giving drinks", set the next round as "taking drinks"
             if (lastRoundIsGiving == true)
@@ -369,18 +437,16 @@ namespace Rivière.BusinessLogic
                 // If the current round was the death card, reset number of sips
                 else if (lastRoundNumberOfSips == numberOfSipsDeathCard)
                 {
-                    lastRoundIsGiving = false;
+                    lastRoundIsGiving = true;
                     lastRoundNumberOfSips = 1;
                 }
                 // If the current round was a regular one, set the next round as "giving drinks" 
                 // and increment the number of sip
                 else
                 {
-                    lastRoundIsGiving = false;
+                    lastRoundIsGiving = true;
                     lastRoundNumberOfSips++;
-
                 }
-
             }
         }
     }

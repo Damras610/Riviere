@@ -1,0 +1,25 @@
+<Project StylesheetPath="stylesheets/riviere_ui_skin.xml">
+  <Project.ExportOptions Namespace="Rivière.Screen.UI" Class="IngameScreenUI" OutputPath="C:\Users\Jeremy Harrault\source\repos\Rivière\Rivière\Src\Screen\UI" />
+  <VerticalSplitPane>
+    <HorizontalSplitPane>
+      <Panel MaxWidth="0">
+        <Image Renderable="images/background.jpg" />
+        <Image Renderable="images/cards/back.png" Margin="15" VerticalAlignment="Center" Id="drawpile_image" />
+        <Image Renderable="images/cards/two_heart.png" Margin="15" HorizontalAlignment="Right" VerticalAlignment="Center" Id="currentcard_image" />
+        <Label Text="X cartes restantes" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#404040FF" Id="remainingcardnumber_label" />
+      </Panel>
+      <Panel Background="#FFE2BDFF">
+        <Panel Margin="15">
+          <Label Text="----- Couleur -----" Font="fonts/comicSans48.fnt" TextColor="#000000FF" HorizontalAlignment="Center" Id="roundname_label" />
+          <Label Text="La prochaine carte est-elle plus grande ou plus petite que ta precedente ?" Font="fonts/comicSans32.fnt" Wrap="True" TextAlign="Center" TextColor="#000000FF" Top="50" HorizontalAlignment="Center" Id="rounddesc_label" />
+          <HorizontalStackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0, 0, 0, 20" Id="playerturn_panel">
+            <Label Text="A ton tour" Font="fonts/comicSans32.fnt" TextColor="#000000FF" Top="-30" Padding="0, 0, 0, 5" VerticalAlignment="Bottom" />
+            <Label Text="Guillaume" Font="fonts/comicSans48.fnt" TextColor="#000000FF" Top="-30" Padding="10, 0, 0, 0" Id="currentplayername_label" />
+          </HorizontalStackPanel>
+          <ComboBox HorizontalAlignment="Center" VerticalAlignment="Center" Id="roundchoice_combobox" />
+          <TextButton Text="Piocher une carte" Top="-30" Padding="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Id="drawcard_button" />
+        </Panel>
+      </Panel>
+    </HorizontalSplitPane>
+  </VerticalSplitPane>
+</Project>
